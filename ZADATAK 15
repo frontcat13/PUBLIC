@@ -1,0 +1,75 @@
+/*Zadatak 15: Napisati program koji omogucava unos cijelobrojnih parnih vrijednosti
+sa neparnim brojem cifara u 1D niz od 20 elemenata. Zatim izbaciti iz niza sve
+brojeve djeljive sa 6.*/
+#include<iostream>
+using namespace std;
+bool Neparni(int broj)
+{
+	int brojac = 0;
+	while (broj)
+	{
+		brojac++;
+		broj /= 10;
+	}
+
+	if (brojac % 2 == 0)
+		return false;
+
+	return true;
+
+}
+void Unos(int niz[], int velicina)
+{
+	for (int i = 0; i < velicina; i++)
+	{
+		int broj;
+
+		do
+		{
+			cin >> broj;
+		} while (broj % 2 != 0 || (!(Neparni(broj))));
+
+		niz[i] = broj;
+
+	}
+
+}
+void Izbacivac(int niz[], int &velicina)
+{
+	for (int i = 0; i < velicina; i++)
+	{
+
+		if (niz[i]%6==0)
+		{
+			for (int j = i; j < velicina-1; j++)
+			{
+				niz[j] = niz[j + 1];
+			}
+			i--;
+			velicina--;
+		}
+
+	}
+
+}
+void Ispis(int niz[],int velicina)
+{
+	for (int i = 0; i < velicina; i++)
+	{
+
+		cout << niz[i] << endl;
+
+	}
+}
+int main()
+{
+
+	int niz[5];
+	int velicina = 5;
+	Unos(niz, velicina);
+	Ispis(niz, velicina);
+	Izbacivac(niz, velicina);
+	Ispis(niz, velicina);
+
+	system("pause>0");
+}
